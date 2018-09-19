@@ -1,0 +1,93 @@
+<!--
+  Generated template for the BookingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+ 
+
+  </ion-header>
+  
+  
+  <ion-content class="content">
+      <form *ngIf="bookings" [formGroup]="bookings" (ngBookings)="book()">
+  
+          <ion-card>
+            <ion-card-header>Do Bookings
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list no-line>
+      
+                <ion-item >
+                  <ion-input formControlName="fname" [(ngModel)]="fname" type="text" placeholder="First Name"></ion-input>
+                </ion-item>
+      
+                <ion-item *ngIf="bookings.controls.fname.invalid && bookings.controls.fname.dirty">
+                    <p>Please enter valid name</p>
+                </ion-item>
+      
+                <!-- <ion-item>
+                    <ion-input formControlName="lname" [(ngModel)]="lname" type="text" placeholder="Last Name"></ion-input>
+                </ion-item>
+      
+                <ion-item *ngIf="bookings.controls.lname.invalid && bookings.controls.lname.dirty">
+                    <p>Please enter valid name</p>
+                </ion-item> -->
+                 
+  <!--               
+                <ion-item>
+                    <ion-input formControlName="password" [(ngModel)]="password" type="password" placeholder="password"></ion-input>
+                </ion-item>
+      
+                <ion-item *ngIf="bookings.controls.password.invalid && bookings.controls.password.dirty">
+                    <p>Please enter valid password</p>
+                </ion-item> -->
+      
+                <ion-item>
+                    <ion-input  formControlName="contactNo" [(ngModel)]="contactNo" type="number" placeholder="Cell Number"></ion-input>
+                </ion-item>
+      
+                <ion-item *ngIf="bookings.controls.contactNo.invalid && bookings.controls.contactNo.dirty">
+                    <p>Please enter valid contact number</p>
+                </ion-item>
+      
+                <ion-item>
+                    <ion-input formControlName="email" [(ngModel)]="email" type="email" placeholder="Email"></ion-input>
+                </ion-item>
+      
+                <ion-item *ngIf="bookings.controls.email.invalid && bookings.controls.email.dirty">
+                    <p>Please enter valid email address</p>
+                </ion-item>
+                <ion-item>
+                  <ion-input formControlName="date" [(ngModel)]="date" type="date" placeholder="date"></ion-input>
+              </ion-item>
+    
+              <ion-item *ngIf="bookings.controls.date.invalid && bookings.controls.date.dirty">
+                  <p>Please enter valid date</p>
+              </ion-item>
+              <!-- <ion-item>
+                  <ion-input formControlName="time" [(ngModel)]="time" type="date" placeholder="time"></ion-input>
+              </ion-item>
+    
+              <ion-item *ngIf="bookings.controls.time.invalid && bookings.controls.time.dirty">
+                  <p>Please enter valid time</p>
+              </ion-item> -->
+      
+                  <button ion-button round outline color="primary" (click)="clickListner()">Book</button>
+        
+              </ion-list>
+      
+              <!-- <ion-list class="text" *ngFor="let user of users">
+                  {{users?.fname}}&{{users?.key}}
+              </ion-list> -->
+            </ion-card-content>
+        
+          </ion-card>
+       
+      </form>
+  
+  
+  </ion-content>
+  

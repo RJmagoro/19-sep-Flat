@@ -1,0 +1,54 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+
+
+</ion-header>
+
+
+<ion-content class="content">
+    <form  [formGroup]="login" (ngSignUp)="login(login)">
+  
+
+        <ion-card >
+            <ion-card-header>Login Client
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list no-line>
+                
+                  <ion-item>
+            
+                      <ion-input formControlName="email" type="email" placeholder="Email"></ion-input>
+            
+                    </ion-item>
+                  
+                  <ion-item *ngIf="login.controls.email.invalid && login.controls.email.dirty">
+                      <p>Please enter Email</p>
+                      </ion-item>
+                    <ion-item>
+                    
+                        <ion-input formControlName="password"  type="password" placeholder="Password"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="login.controls.password.invalid && login.controls.password.dirty">
+                        <p>Please enter Password</p>
+              
+                      </ion-item>
+                
+                  <button ion-button round outline color="light" (click)="logins()" >Login</button>
+                  <button ion-button round outline color="light" (click)="reset()">Reset</button>
+        
+              </ion-list>
+            </ion-card-content>
+        
+          </ion-card>
+    
+    
+    
+    </form>  
+
+</ion-content>
