@@ -8,50 +8,53 @@
 
  
 
-  </ion-header>
-  
-  
-  <ion-content class="content">
-      <ion-grid (click)="uploadPic()">
-          <ion-row >
-            <ion-col>
-             
-            </ion-col>
-            
-            <ion-col>
-        
-             <ion-icon  name="cloud-download-outline" style="font-size: 60px;" ></ion-icon>
-             
-            </ion-col>
+</ion-header>
+
+    <ion-content class="content">
+        <ion-grid (click)="uploadPic()">
+            <ion-row >
+              <ion-col>
+               
+              </ion-col>
+              
+              <ion-col>
           
-          </ion-row>
-        </ion-grid>
-        <br>
-        <h6 style="text-align: center">Provide flat details</h6>
-        <ion-item >
-            <ion-input Name="fname" [(ngModel)]="fname" type="text" placeholder="Flat Name"></ion-input>
-          </ion-item>
-    
+               <ion-icon  name="cloud-download-outline" style="font-size: 60px;" ></ion-icon>
+               
+              </ion-col>
+            
+            </ion-row>
+          </ion-grid>
+          <br>
+          <h6 style="text-align: center">Provide flat details</h6>
           <ion-item >
-              <ion-input Name="Address" [(ngModel)]="Address" type="text" placeholder="Address"></ion-input>
+              <ion-input Name="fname" [(ngModel)]="fname" type="text" placeholder="Flat Name"></ion-input>
             </ion-item>
-    
-    
+      
             <ion-item >
-                <ion-input Name="Price" [(ngModel)]="Price" type="text" placeholder="Price"></ion-input>
-                
+                <ion-input Name="Address" [(ngModel)]="Address" type="text" placeholder="Address"></ion-input>
               </ion-item>
-              <ion-item (click)="takePicture()">
-                Upload
-              </ion-item>
-    
-       
-        
-        <button ion-button round  full (click)="uploadPic()" >Advertise</button>
-        <div *ngIf="chocolate === 1" class="image-container">
-          <!-- <img src={{imageUrl}} > -->
-          <img *ngFor="let img of images" src={{img}} class="images">
-          </div>
-    <button ion-button round full (click)="getImage()">view</button>
-  </ion-content>
-  
+      
+      
+              <ion-item >
+                  <ion-input Name="Price" [(ngModel)]="Price" type="text" placeholder="Price"></ion-input>
+                  
+                </ion-item>
+                <ion-item (click)="takePicture()">
+                  Upload
+                </ion-item>
+      
+         
+          
+          <!-- <button ion-button round  full (click)="uploadPic()" >Advertise</button> -->
+          <div *ngIf="chocolate === 1" class="image-container">
+            <!-- <img src={{imageUrl}} > -->
+            <img *ngFor="let img of images" src={{img}} class="images">
+            </div>
+      <button ion-button round full (click)="getImage()">view</button>
+      <button ion-button round  full (click)="saveImgToFireStorage()" >SAve</button>
+      </ion-content>
+      
+      
+
+

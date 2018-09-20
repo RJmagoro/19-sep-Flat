@@ -7,7 +7,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-declare var firebaseStorage;
+
 declare var firebase;
 @IonicPage()
 @Component({

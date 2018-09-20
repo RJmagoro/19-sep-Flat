@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { FormBuilder, FormGroup } from '@angular/forms';
+
 
 /**
  * Generated class for the WelcomePage page.
@@ -15,14 +15,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: 'welcome.html',
 })
 export class WelcomePage {
-  login: FormGroup;
+  
   display = 0;
   email:string;
   password:string;
   testRadioOpen;
   testRadioResult;
 
-  constructor(private alertCtrl:AlertController,private fb:FormBuilder,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private alertCtrl:AlertController,public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {

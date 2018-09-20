@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ActionSheetController, ToastController, LoadingController, Platform  } from 'ionic-angular';
-import { Camera,PictureSourceType,CameraOptions } from '@ionic-native/camera';
+import { IonicPage, NavController, NavParams, ActionSheetController, ToastController, LoadingController, Platform } from 'ionic-angular';
+import { Camera, PictureSourceType,CameraOptions } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
-
 /**
  * Generated class for the AdvertisePage page.
  *
@@ -17,11 +16,11 @@ declare var firebase;
   templateUrl: 'advertise.html',
 })
 export class AdvertisePage {
-  eventName;
-  eventDate;
-  eventTime;
-  category;
-  eventVenue;
+  fname;
+  Address;
+  Price;
+  // category;
+  // eventVenue;
   selectedImage: string;
   
   fire={
@@ -30,14 +29,12 @@ export class AdvertisePage {
   //firebaseUploads: any;
   imageURI: any;
   pic_available: boolean;
-  platform;
-  
-
+  platform: any;
+  //user
+  //userObj;
   constructor(public navCtrl: NavController,private filePath: FilePath, public navParams: NavParams, private camera: Camera, 
-    private actionSheetCtrl: ActionSheetController,private f:File,private toastCtrl: ToastController,public loadingCtrl: LoadingController, public plt:Platform) {
-  
-    }
-
+    private actionSheetCtrl: ActionSheetController,public f: File,private toastCtrl: ToastController,public loadingCtrl: LoadingController, public plt:Platform) {
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdvertisePage');
   }
@@ -47,7 +44,7 @@ export class AdvertisePage {
   addEvent(){
   }
   getImage(){
-    var storageREf =  firebase.storage().ref('files/logo.jpg').getDownloadURL().then(function(url) {
+    var storageREf =  firebase.storage().ref('Upload').getDownloadURL().then(function(url) {
       // `url` is the download URL for 'images/stars.jpg'
       console.log("URL = " +url);
       
@@ -83,7 +80,7 @@ export class AdvertisePage {
       var blob = new Blob([buffer], {type: 'image/jpeg'});
       console.log(blob.size);
       console.log(blob)
-      const storageRef = firebase.storage().ref('Upload/' + new Date().getTime() + extension);
+      const storageRef = firebase.storage().ref('upload/' + new Date().getTime() + extension);
       return storageRef.put(blob).then((snapshot:any) => {
         console.log('Upload completed')
         //this.loader.dismiss;
@@ -95,8 +92,8 @@ export class AdvertisePage {
           this.fire.downloadUrl = url;
           console.log(url);
           //this.firebaseUploads.push({downloadUrl: url,Admin_Authentication_UID :this.userObj[0].authentication_UID,EventName:this.eventName,eventVenue:this.eventVenue, EventDate: this.eventDate,EventTime: this.eventTime, EventCategory: this.category});
-          firebase.database().ref('/Upload/').push({downloadUrl: this.fire.downloadUrl,EventName:this.eventName,eventVenue:this.eventVenue, EventDate: this.eventDate,EventTime: this.eventTime, EventCategory: this.category});
-          this.navCtrl.setRoot("ViewPage");
+          firebase.database().ref('/Adds/').push({downloadUrl: this.fire.downloadUrl,fNAme:this.fname,Address:this.Address, Price: this.Price});
+          //this.navCtrl.setRoot("ViewEventPage");
           return this.fire.downloadUrl;
         });
         console.log("Download URL = "+ this.fire.downloadUrl);
@@ -110,12 +107,14 @@ export class AdvertisePage {
     }else{
     //   this.pic_available=false
     //  var noPic = this.pic_available;
-      firebase.database().ref('/Upload/').push({downloadUrl: 'none',EventName:this.eventName,eventVenue:this.eventVenue, EventDate: this.eventDate,EventTime: this.eventTime, EventCategory: this.category});
-      this.navCtrl.push("ViewPage");
+      firebase.database().ref('/Adds/').push({downloadUrl: 'none',fNAme:this.fname,Address:this.Address, Price: this.Price});
+      //this.navCtrl.push("ViewEventPage");
+      return this.fire.downloadUrl;
     }
   }
 public takePicture(/*sourceType*/) {
     // Create options for the Camera Dialog
+    //console.log("--------------> "+sourceType);
     var options = {
       quality: 100,
       //sourceType: sourceType,
@@ -129,7 +128,7 @@ public takePicture(/*sourceType*/) {
     // Get the data of an image
     this.camera.getPicture(options).then((imagePath) => {
       
-    if (this.platform.is('android') && options.sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+    //  if (this.platform.is('android') && options.sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
         this.filePath.resolveNativePath(imagePath)
           .then(filePath => {
            
@@ -145,14 +144,13 @@ public takePicture(/*sourceType*/) {
             console.log('inside toast if')
            }
           });
-      } else {
-        var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-        var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-       // this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-      }
+      // } else {
+      //   var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+      //   var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+      //  // this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+      // }
     }, (err) => {
      // this.presentToast('Error while selecting image.');
     });
   }
-
 }
