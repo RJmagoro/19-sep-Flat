@@ -16,54 +16,83 @@ declare var firebase;
   templateUrl: 'bookings.html',
 })
 export class BookingsPage {
-  bookings: FormGroup;
-name;
-fname;
-lname;
-password;
-email;
-contactNo;
-date;
-
-human={
-fname:"",
-lname:"",
-password:"",
-email:"",
-  contactNo:"",
-  date:"",
+  doBookings: FormGroup;
+  fname;
+  lname;
+  contactNo;
+  email;
+  bookingDate;
+  time;
   
-  
-}
-
+  bookings=[];
+  bookingInfo={
+  key:'',
+   fname:'',
+   lname:'',
+   contactNo:'',
+   email:'',
+   bookingDate:'',
+   time:''
+  }
   constructor(private fb:FormBuilder,public navCtrl: NavController, public navParams: NavParams) {
-    this.bookings=this.fb.group({
-      fname:['',Validators.required],
-      lname:['',Validators.required],
-      password:['',Validators.required],
-      contactNo:['',Validators.required],
-      email:['',Validators.required],
-      date:['',Validators.required],
-      
+    this.doBookings=this.fb.group({
+      fname:['',[Validators.required,Validators.pattern('[a-zA-Z]*'),Validators.maxLength(20)]],
+      lname:['',[Validators.required,Validators.pattern('[a-zA-Z]*'),Validators.maxLength(20)]],
+      contactNo:['',[Validators.required,Validators.pattern('[a-zA-Z]*'),Validators.maxLength(20)]],
+      email:['',[Validators.required,Validators.pattern('[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})'),Validators.maxLength(25)]],
+      // bookingDate:[Validators.required,Validators.maxLength(10)],
+      // time:['',[Validators.required,Validators.maxLength(10)]],
     })
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BookingsPage');
-  }
-  userLogout(){
-    firebase.auth().signOut().then(User =>{
-      this.navCtrl.push("HomePage");
-    });
-  } 
+  
+  this.bookings = [];
 
-  clickListner(){
-    firebase.auth().createUserWithEmailAndPassword(this.email,this.password).then(user => {
-      
-      })
-    PEOPLE.push({fname:this.fname,lname:this.lname,date:this.date,password:this.password,contactNo:this.contactNo,email:this.email})
-    this.navCtrl.push("UserIsBookingPage",{variable: this.name});
-  }
+  firebase.database().ref('/bookingInfo/').on("value",(snapshot)=>{
+    // this.bookings=[];
+    snapshot.forEach((snap)=>{
+
+   console.log(snap.val());
+
+    // this.bookings.push(snap.val());
+    console.log(snap.val().fname + ' key ' + snap.key)
+    this.bookings.push({fname:snap.val().fname, key:snap.key,lname:snap.val().lname,contactNo:snap.val().contactNo,email:snap.val().email,
+      bookingDate:snap.val().bookingDate,time:snap.val().time});
+
+
+
+   return false;
+  });
+  });
+}
+writeBooking(){
+  console.log(this.fname,this.lname,this.contactNo,this.email,this.bookingDate,this.time);
+  this.bookingInfo.fname =this.fname;
+  this.bookingInfo.lname =this.lname;
+  this.bookingInfo.contactNo=this.contactNo;
+  this.bookingInfo.email=this.email;
+  this.bookingInfo.bookingDate=this.bookingDate;
+  this.bookingInfo.time=this.time;
+  var database = firebase.database();
+  database.ref('/bookingInfo').push(this.bookingInfo);
 
 
 }
+
+removeBookings(booking){
+  var database = firebase.database();
+  database.ref('/bookingInfo/').remove();
+  
+
+  this.bookings = [];
+
+
+}
+ViewPage(){
+  this.navCtrl.push("WelcomePage");
+}
+}
+
+

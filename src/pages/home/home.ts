@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { ViewChild } from '@angular/core';
+import { Slides } from 'ionic-angular';
 /**
  * Generated class for the HomePage page.
  *
@@ -14,7 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'home.html',
 })
 export class HomePage {
-
+  @ViewChild(Slides) slides: Slides;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -22,10 +23,10 @@ export class HomePage {
     console.log('ionViewDidLoad HomePage');
   }
   getStarted(){
-    this.navCtrl.setRoot("ViewPage");
+    this.navCtrl.setRoot("WelcomePage");
   }
   next(){
-    this.navCtrl.setRoot("WelcomePage")
+    this.slides.slideTo(2, 500);
   }
 
 }

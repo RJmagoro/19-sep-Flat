@@ -45,5 +45,14 @@ export class LoginPage {
     this.navCtrl.push("ResetPage");
      
    }
+   ViewPage(){
+     this.navCtrl.push("ViewPage")
+   }
+   loginWithGoogle(){
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).then(User =>{
+      this.navCtrl.push("WelcomePage");
+    })
+   }
 
 }

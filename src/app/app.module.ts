@@ -10,6 +10,7 @@ import { File } from '@ionic-native/file';
 import { MyApp } from './app.component';
 
 
+
 @NgModule({
   declarations: [
     MyApp,

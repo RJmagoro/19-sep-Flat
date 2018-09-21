@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 
+
 /**
  * Generated class for the WelcomePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+declare var firebase;
 @IonicPage()
 @Component({
   selector: 'page-welcome',
@@ -21,8 +22,10 @@ export class WelcomePage {
   password:string;
   testRadioOpen;
   testRadioResult;
+  flatList = [];
 
   constructor(private alertCtrl:AlertController,public navCtrl: NavController, public navParams: NavParams) {
+    this.getImage();
   }
 
   ionViewDidLoad() {
@@ -85,7 +88,7 @@ export class WelcomePage {
       this.navCtrl.push("ClientPage");
 
     }
-    loginl(){
+    login(){
      this.navCtrl.push("LoginPage")
     }
     reset(){
@@ -136,5 +139,32 @@ export class WelcomePage {
       });*/
       alert.present();
    }
+   getImage(){
+
+    firebase.database().ref('/Adds/').on('value', (snapshot) =>
+  {
+    snapshot.forEach((snap) => 
+    { 
+      //Initializing Item;
+      /*this.item._key = snap.key;
+      this.item.name = snap.val().c_itemName;*/
+      //Adding Item to itemsList
+      this.flatList.push({_key : snap.key, fname: snap.val().fNAme, Address: snap.val().Address, Price : snap.val().Price, downloadUrl: snap.val().downloadUrl});
+     console.log(snap.val().downloadUrl);
+     console.log(this.flatList);
+      return false;
+    });
+    console.log(this.flatList);
+  });
+  }
+  
+  landLordSignUp(){
+    this.navCtrl.push("SignupPage");
+  }
+  getFlatDetails(flat:any){
+console.log(flat.fname);
+
+    this.navCtrl.push("FlatDetailsPage",{flat:flat});
+  }
 
 }

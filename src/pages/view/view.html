@@ -12,22 +12,27 @@
 
 
 <ion-content class="content">
-    <ion-grid>
-        <ion-col col-4>
-            <button ion-button  outline  full style = "color: #69F0AE " (click)="cancel()" >Cancel</button>
-        </ion-col>
-     
-      <ion-col col-4>
-          <button ion-button  outline  full style = "color: #69F0AE " (click)="userLogout()" >Logout</button>
-      </ion-col>
-      <ion-col col-4>
-          <button ion-button outline full style="color: #69F0AE" (click)="Login()">Login</button>
-
-      </ion-col>
-
-    
-    </ion-grid>
-  <button ion-button (click)="takePicture()">takephoto</button>
-  <button ion-button (click)="uploadImage()">upload</button>
+        <button ion-button  round outline color style = "color: #69F0AE " (click)=" landLordSignUp()"> 
+                <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon></button>
+              <button ion-button round outline color = button    style = "color: #69F0AE " (click) = "login()" >Log in</button>
+              <button ion-button  round outline    style = "color: #69F0AE " (click) ="showCheckbox()">Sign Up</button>
+            <ion-list>
+              <ion-item >
+                <ion-grid col =3 *ngFor = "let flat of flatList">
+                  <ion-row>
+                    <ion-col>
+                      <img src="{{flat?.downloadUrl}}" height="100" width="100">
+                    </ion-col>
+                    <ion-col>
+                      {{flat?.fname}}
+                    </ion-col>
+                    <ion-col>{{flat?.Address}}</ion-col>
+                    <ion-col>
+                     {{flat?.Price}}
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-item> 
+            </ion-list>
 
 </ion-content>

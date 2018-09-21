@@ -12,14 +12,28 @@
 
 
 <ion-content class="content">
-    <img src="../../assets/imgs/flat1.jpg">
-<div class="btn" *ngIf="display == 0">
-    
-      <button ion-button  outline  full style = "color: #69F0AE "  (click)="showCheckbox()">Sign UP</button>
-      <button ion-button  outline  full   style = "color: #69F0AE "  (click)="showCheckboxlogin()">Login</button>
-    <!-- <button ion-button round outline     style = "color: #69F0AE " (click) = "login()" >Login</button>
-    <button ion-button  round outline     style = "color: #69F0AE " (click)="signup()">Sign Up</button>
- -->
-</div>
+    <button ion-button  round outline color style = "color: #69F0AE " (click)=" landLordSignUp()"> 
+        <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon></button>
+      <button ion-button round outline color = button    style = "color: #69F0AE " (click) = "login()" >Log in</button>
+      <button ion-button  round outline    style = "color: #69F0AE " (click) ="showCheckbox()">Sign Up</button>
+    <ion-list>
+      <ion-item >
+        <ion-grid col =3 *ngFor = "let flat of flatList" (click)="getFlatDetails(flat)">
+          <ion-row>
+            <ion-col>
+              <img src="{{flat?.downloadUrl}}" height="100" width="100">
+            </ion-col>
+           <!-- <ion-col>
+              
+              {{flat?.fname}}
+            </ion-col>
+            <ion-col>{{flat?.Address}}</ion-col>
+            <ion-col>
+             {{flat?.Price}}
+            </ion-col>-->
+          </ion-row>
+        </ion-grid>
+      </ion-item> 
+    </ion-list>
 
 </ion-content>

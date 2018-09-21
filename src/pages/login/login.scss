@@ -8,15 +8,15 @@ page-login {
         background-color: rgba(0,0,0,0.5);
         border-radius: 5px;
     }
-    a, p,
-    ion-card-header.card-header{
-        color: white!important;
+    // a, 
+    // ion-card-header.card-header{
+    //     color: white!important;
         
-            letter-spacing: 3px;
-            line-height: 2px;
+    //         letter-spacing: 3px;
+    //         line-height: 1px;
             
     
-    }
+    // }
     .list > .item-block:first-child{
         border: medium none;
     }
@@ -51,6 +51,7 @@ page-login {
             color:#fff;
     
         }
+       
     }
     
     

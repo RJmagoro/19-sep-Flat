@@ -5,6 +5,11 @@
   Ionic pages and navigation.
 -->
 <ion-header>
+        <ion-buttons left>
+                <button ion-button icon-only  style="color: aliceblue" (click)="ViewPage(ViewPage)">
+                    <ion-icon name="arrow-back"></ion-icon>
+                </button>
+            </ion-buttons>
 
 
 
@@ -13,6 +18,8 @@
 
 <ion-content class="content">
     <form  [formGroup]="login" (ngSignUp)="login(login)">
+        
+
   
 
         <ion-card >
@@ -28,14 +35,16 @@
                     </ion-item>
                   
                   <ion-item *ngIf="login.controls.email.invalid && login.controls.email.dirty">
-                      <p>Please enter Email</p>
+                      <p>incorrect email</p>
+                      
                       </ion-item>
                     <ion-item>
                     
                         <ion-input formControlName="password"  type="password" placeholder="Password"></ion-input>
                     </ion-item>
                     <ion-item *ngIf="login.controls.password.invalid && login.controls.password.dirty">
-                        <p>Please enter Password</p>
+                        <p>please enter a valid password</p>
+                        
               
                       </ion-item>
                 
@@ -46,6 +55,7 @@
             </ion-card-content>
         
           </ion-card>
+          <button ion-button round outline color="light" (click)="loginWithGoogle()" >Login with Google&nbsp; <ion-icon ios="logo-google" md="logo-google"></ion-icon></button>
     
     
     
