@@ -30,6 +30,8 @@ export class TenatLoginPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TenatLoginPage');
   }
+
+  
   logins(){
     firebase.auth().signInWithEmailAndPassword(this.email,this.password).then(user => {
       console.log('sign up page');

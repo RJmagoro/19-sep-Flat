@@ -41,7 +41,9 @@
                   
                 </ion-item>
                 <ion-item (click)="takePicture()">
-                  Upload
+                  <ion-label >Upload</ion-label>
+                  <button ion-button icon-only (click)="takePicture()">  <ion-icon ios="ios-images" md="md-images"></ion-icon></button>
+                    
                 </ion-item>
       
          
@@ -52,7 +54,7 @@
             <img *ngFor="let img of images" src={{img}} class="images">
             </div>
       <button ion-button round full (click)="getImage()">view</button>
-      <button ion-button round  full (click)="saveImgToFireStorage()" >SAve</button>
+      <button ion-button round  full (click)="saveImgToFireStorage()" >Add Flat</button>
       </ion-content>
       
       

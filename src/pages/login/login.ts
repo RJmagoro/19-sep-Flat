@@ -19,6 +19,7 @@ export class LoginPage {
   display = 0;
   email:string;
   password:string;
+  ids;
 
   constructor(private fb:FormBuilder,public navCtrl: NavController, public navParams: NavParams) {
     this.login = this.fb.group({
@@ -34,8 +35,9 @@ export class LoginPage {
   }
   logins(){
     firebase.auth().signInWithEmailAndPassword(this.email,this.password).then(user => {
-      console.log('sign up page');
-
+      console.log("user ===="+user);
+      
+        this.navCtrl.setRoot("WelcomePage",{user:user});
      
     })
     
@@ -51,7 +53,9 @@ export class LoginPage {
    loginWithGoogle(){
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then(User =>{
-      this.navCtrl.push("WelcomePage");
+      this.ids = User;
+      console.log("user ===="+ this.ids);
+      this.navCtrl.push("WelcomePage",{user:this.ids});
     })
    }
 
